@@ -2,6 +2,7 @@ package com.sierravanguard.beyond_oxygen.utils;
 
 import com.sierravanguard.beyond_oxygen.BOConfig;
 import com.sierravanguard.beyond_oxygen.BOServerConfig;
+import com.sierravanguard.beyond_oxygen.registry.BODimensions;
 import com.sierravanguard.beyond_oxygen.registry.BOEffects;
 import com.sierravanguard.beyond_oxygen.registry.BOFluids;
 import com.sierravanguard.beyond_oxygen.registry.BOOxygenSources;
@@ -12,6 +13,7 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraft.server.level.ServerLevel;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -36,6 +38,7 @@ public class OxygenManager {
     }
     
     public static void consumeOxygen(LivingEntity entity) {
+        if(OxygenHelper.isInBreathableEnvironment(entity)) return;
         if (!SpaceSuitHandler.isWearingFullSuit(entity)) return;
         int mbToDrain = 1;
         IntReference needs = new IntReference(mbToDrain);
